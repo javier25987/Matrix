@@ -23,6 +23,7 @@ int main() {
     matrix.printM();
 
     printV(matrix.get_row(0));
+    printV(matrix.get_colum(0));
 
     return 0;
 }
