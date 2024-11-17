@@ -4,15 +4,7 @@
 #include <vector>
 #include "Matrix.h"
 
-template <class T>
-void printV(std::vector<T> vec)
-{
-    for (const T x : vec)
-    {
-        std::cout << x << " ";
-    }
-    std::cout << std::endl;
-}
+// hello world, i'm enot gay
 
 int main() {
     Matrix<int> matrix = {
