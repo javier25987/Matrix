@@ -4,7 +4,7 @@
 #include <vector>
 #include "Matrix.h"
 
-// hello world, i'm enot gay
+// hello world, i'm enot and i'm not gay
 
 int main() {
     Matrix<int> matrix = {
