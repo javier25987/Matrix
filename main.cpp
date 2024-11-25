@@ -4,16 +4,6 @@
 #include <vector>
 #include "Matrix.h"
 
-template <class T>
-void printV(std::vector<T> vec)
-{
-    for (const T x : vec)
-    {
-        std::cout << x << " ";
-    }
-    std::cout << std::endl;
-}
-
 int main() {
     Matrix<int> matrix = {
         {1, 2, 3},
@@ -25,5 +15,10 @@ int main() {
     printV(matrix.get_row(0));
     printV(matrix.get_colum(0));
 
+    for (int i = 0; i < 4; i++)
+    {
+        matrix.transpose();
+        matrix.printM();
+    }
     return 0;
 }

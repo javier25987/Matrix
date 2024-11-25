@@ -9,12 +9,12 @@
 template <class T>
 void printV(std::vector<T> vec)
 {
-	std::cout << "( ";
+	std::cout << "{ ";
 	for (const T x : vec)
 	{
 		std::cout << x << " ";
 	}
-	std::cout << ")" << std::endl;
+	std::cout << "}" << std::endl;
 }
 
 
@@ -67,17 +67,39 @@ public:
 	}
 
 
+	void transpose()
+	{
+		size_t col = _MX[0].size();
+		std::vector<std::vector<T>> new_matrix;
+		std::vector<T> temporal_v;
+
+		for (size_t i = 0; i < col; i++)
+		{
+			for (std::vector<T> x : _MX)
+			{
+				temporal_v.push_back(x[i]);
+			}
+			new_matrix.push_back(temporal_v);
+
+			temporal_v.clear();
+		}
+		_MX = new_matrix;
+	}
+
+
 	void printM() const
 	{
+		std::cout << "{\n";
 		for (const auto& row : _MX)
 		{
-			std::cout << "| ";
+			std::cout << "  { ";
 			for (const auto& elem : row)
 			{
 				std::cout << elem << " ";
 			}
-			std::cout << "|" << "\n";
+			std::cout << "}" << "\n";
 		}
+		std::cout << "}\n";
 	}
 };
 
