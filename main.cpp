@@ -12,7 +12,6 @@ int main() {
         {  0, -1,  1,  2 }
     };
 
-    /*
     matrix.printM();
 
     printV(matrix.get_row(0));
@@ -23,7 +22,6 @@ int main() {
         matrix.transpose();
         matrix.printM();
     }
-    */
 
     std::cout << "Rang = " << matrix.rang() << "\n";
 

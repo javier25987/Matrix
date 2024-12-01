@@ -65,13 +65,13 @@ public:
 	{
 		if (0 <= row && row < _MX[0].size())
 		{
-			std::vector<T> temporal_v;
+			std::vector<T> temp;
 
 			for (std::vector<T>& elem : _MX)
 			{
-				temporal_v.push_back(elem[row]);
+				temp.push_back(elem[row]);
 			}
-			return temporal_v;
+			return temp;
 		}
 		else
 		{
@@ -79,22 +79,21 @@ public:
 		}
 	}
 
-
 	void transpose()
 	{
 		size_t col = _MX[0].size();
 		std::vector<std::vector<T>> new_matrix;
-		std::vector<T> temporal_v;
+		std::vector<T> temp;
 
 		for (size_t i = 0; i < col; i++)
 		{
 			for (std::vector<T> x : _MX)
 			{
-				temporal_v.push_back(x[i]);
+				temp.push_back(x[i]);
 			}
-			new_matrix.push_back(temporal_v);
+			new_matrix.push_back(temp);
 
-			temporal_v.clear();
+			temp.clear();
 		}
 		_MX = new_matrix;
 	}
@@ -119,46 +118,45 @@ public:
 
 	int rang() const
 	{
-		int rows = _MX.size();
-		int cols = _MX[0].size();
+		size_t rows = _MX.size();
+		size_t cols = _MX[0].size();
 
-		std::vector<std::vector<T>> matrix;
+		std::vector<std::vector<double>> matrix;
+		std::vector<double> temp;
 		
 		if (rows > cols)
 		{
-			std::vector<T> temporal_v;
-
 			for (size_t i = 0; i < cols; i++)
 			{
-				for (std::vector<T> x : _MX)
+				for (auto x : _MX)
 				{
-					temporal_v.push_back(x[i]);
+					temp.push_back((double)x[i]);
 				}
 
-				matrix.push_back(temporal_v);
-				temporal_v.clear();
+				matrix.push_back(temp);
+				temp.clear();
 			}
 			std::swap(rows, cols);
 		}
 		else
 		{
-			matrix = _MX;
+			for (size_t i = 0; i < _MX.size(); i++)
+			{
+				for (size_t j = 0; j < _MX[0].size(); j++)
+				{
+					temp.push_back((double)_MX[i][j]);
+				}
+				matrix.push_back(temp);
+				temp.clear();
+			}
 		}
 
-		int v_ind = 0, h_ind = 0;
+		size_t v_ind = 0, h_ind = 0;
 		bool colum_is_cero = false;
 		double factor, pivot;
 
 		while (v_ind < rows && h_ind < cols)
 		{
-
-			std::cout << "vertical: " << v_ind << " ; horizontal: " << h_ind << std::endl;
-
-			for (std::vector<T> x : matrix)
-			{
-				printV(x);
-			}
-
 			if (std::abs(matrix[v_ind][h_ind]) < 1e-9)
 			{
 				if (all_is_zero(matrix[v_ind]))
@@ -170,7 +168,7 @@ public:
 				else
 				{
 					colum_is_cero = true;
-					for (int i = v_ind + 1; i < rows; i++)
+					for (size_t i = v_ind + 1; i < rows; i++)
 					{
 						if (std::abs(matrix[i][h_ind]) > 1e-9)
 						{
@@ -190,23 +188,19 @@ public:
 			
 			pivot = matrix[v_ind][h_ind];
 
-			for (int i = v_ind + 1; i < rows; i++) 
+			for (size_t i = v_ind + 1; i < rows; i++) 
 			{
 				factor = matrix[i][h_ind] / pivot;
 
 				for (int j = h_ind; j < cols; j++) 
 				{
-					std::cout << "lv: " << i << " ; lh: " << j << " ; fac: " << factor << "\n";
 					matrix[i][j] -= factor * matrix[v_ind][j];
 				}
 			}
 
 			v_ind++;
 			h_ind++;
-
-			std::cout << "--------------------------------\n";
 		}
-
 		return rows;
 	}
 };
