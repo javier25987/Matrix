@@ -1,0 +1,11 @@
+# Ignorar archivos específicos
+Matrix.vcxproj
+Matrix.vcxproj.filters
+Matrix.vcxproj.user
+
+# Ignorar todos los archivos con extensión .exe
+*.exe
+
+# Ignorar la carpeta x64
+x64/
+
