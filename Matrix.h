@@ -1,10 +1,10 @@
 #ifndef Matrix_H
 #define Matrix_H
 
+
 #include <vector>
 #include <initializer_list>
 #include <iostream>
-#include <cmath>
 
 
 template <class T>
@@ -79,6 +79,7 @@ public:
 		}
 	}
 
+
 	void transpose()
 	{
 		size_t col = _MX[0].size();
@@ -132,7 +133,6 @@ public:
 				{
 					temp.push_back((double)x[i]);
 				}
-
 				matrix.push_back(temp);
 				temp.clear();
 			}
@@ -185,7 +185,6 @@ public:
 					}
 				}
 			}
-			
 			pivot = matrix[v_ind][h_ind];
 
 			for (size_t i = v_ind + 1; i < rows; i++) 
@@ -197,7 +196,6 @@ public:
 					matrix[i][j] -= factor * matrix[v_ind][j];
 				}
 			}
-
 			v_ind++;
 			h_ind++;
 		}
