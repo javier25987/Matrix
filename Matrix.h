@@ -227,12 +227,12 @@ public:
 	{
 		_MX = init;
 	}
-
+	//get count row
 	size_t getrow()  const{
 		return _MX.size();
 	}
 
-	// Returns value of given location when asked in the form A(x,y)
+	// Даёт значение в (х, у)
 	T& operator()(const unsigned& rowNo, const unsigned& colNo)
 	{
 		return _MX[rowNo][colNo];
@@ -273,7 +273,7 @@ public:
 		return diff;
 	}
 
-	// Multiplication of Two Matrices
+	// Умножение матриц
 	Matrix operator*(Matrix& B) {
 		std::vector<std::vector<T>> multip;
 		if (_MX[0].size() == B.getrow())
@@ -288,12 +288,9 @@ public:
 					temp = 0.0;
 					for (k = 0; k < _MX[0].size(); k++)
 					{
-						std::cout << "this" << std::endl;
 						temp += _MX[i][k] * B(k, j);
 					}
-					std::cout << "this2" << std::endl;
 					tmp.push_back(temp);
-					std::cout << "this3" << std::endl;
 				}
 				multip.push_back(tmp);
 				tmp.clear();
@@ -307,7 +304,7 @@ public:
 		}
 	}
 
-	// Scalar Addition
+	// Добавить константу
 	Matrix operator+(double scalar) {
 		std::vector<std::vector<T>> result;
 		std::vector<T> tmp;
@@ -324,7 +321,7 @@ public:
 		return result;
 	}
 
-	// Scalar Subraction
+	// Вычесть константу
 	Matrix operator-(double scalar) {
 		std::vector<std::vector<T>> result;
 		std::vector<T> tmp;
@@ -341,7 +338,7 @@ public:
 		return result;
 	}
 
-	// Scalar Multiplication
+	// Умножить на константу
 	Matrix operator*(double scalar) {
 		std::vector<std::vector<T>> result;
 		std::vector<T> tmp;
@@ -358,7 +355,7 @@ public:
 		return result;
 	}
 
-	// Scalar Division
+	// Поделить на константу
 	Matrix operator/(double scalar) {
 		std::vector<std::vector<T>> result;
 		std::vector<T> tmp;
