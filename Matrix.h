@@ -153,6 +153,7 @@ public:
 				temp.clear();
 			}
 		}
+
 		int v_ind = 0, h_ind = 0;
 		bool colum_is_cero = false;
 		double factor, pivot;
@@ -217,6 +218,164 @@ public:
 
 		return rows;
 	}
+
+	// ==========  here is ilia's work
+
+
+	//vector(vector(T))
+	Matrix(std::vector<std::vector<T>> init)
+	{
+		_MX = init;
+	}
+
+	size_t getrow()  const{
+		return _MX.size();
+	}
+
+	// Returns value of given location when asked in the form A(x,y)
+	T& operator()(const unsigned& rowNo, const unsigned& colNo)
+	{
+		return _MX[rowNo][colNo];
+	}
+
+	// Сумма двух матриц
+	Matrix operator+(Matrix& B) {
+		std::vector<std::vector<T>> sum;
+		std::vector<T> tmp;
+		unsigned i, j;
+		for (i = 0; i < _MX.size(); i++)
+		{
+			for (j = 0; j < _MX[0].size(); j++)
+			{
+				tmp.push_back(_MX[i][j] + B(i, j));
+			}
+			sum.push_back(tmp);
+			tmp.clear();
+		}
+		return sum;
+	}
+
+	// Разность двух матриц
+	Matrix operator-(Matrix& B) {
+		std::vector<std::vector<T>> diff;
+		std::vector<T> tmp;
+		unsigned i, j;
+		for (i = 0; i < _MX.size(); i++)
+		{
+			for (j = 0; j < _MX[0].size(); j++)
+			{
+				tmp.push_back(_MX[i][j] - B(i, j));
+			}
+			diff.push_back(tmp);
+			tmp.clear();
+		}
+
+		return diff;
+	}
+
+	// Multiplication of Two Matrices
+	Matrix operator*(Matrix& B) {
+		std::vector<std::vector<T>> multip;
+		if (_MX[0].size() == B.getrow())
+		{
+			unsigned i, j, k;
+			std::vector<T> tmp;
+			T temp = 0.0;
+			for (i = 0; i < _MX.size(); i++)
+			{
+				for (j = 0; j < _MX[0].size(); j++)
+				{
+					temp = 0.0;
+					for (k = 0; k < _MX[0].size(); k++)
+					{
+						std::cout << "this" << std::endl;
+						temp += _MX[i][k] * B(k, j);
+					}
+					std::cout << "this2" << std::endl;
+					tmp.push_back(temp);
+					std::cout << "this3" << std::endl;
+				}
+				multip.push_back(tmp);
+				tmp.clear();
+			}
+			return multip;
+		}
+		else
+		{
+			std::cout<< "Error" << std::endl;
+			//  std::assert(true == false);
+		}
+	}
+
+	// Scalar Addition
+	Matrix operator+(double scalar) {
+		std::vector<std::vector<T>> result;
+		std::vector<T> tmp;
+		unsigned i, j;
+		for (i = 0; i < _MX.size(); i++)
+		{
+			for (j = 0; j < _MX[0].size(); j++)
+			{
+				tmp.push_back(_MX[i][j] + scalar);
+			}
+			result.push_back(tmp);
+			tmp.clear();
+		}
+		return result;
+	}
+
+	// Scalar Subraction
+	Matrix operator-(double scalar) {
+		std::vector<std::vector<T>> result;
+		std::vector<T> tmp;
+		unsigned i, j;
+		for (i = 0; i < _MX.size(); i++)
+		{
+			for (j = 0; j < _MX[0].size(); j++)
+			{
+				tmp.push_back(_MX[i][j] - scalar);
+			}
+			result.push_back(tmp);
+			tmp.clear();
+		}
+		return result;
+	}
+
+	// Scalar Multiplication
+	Matrix operator*(double scalar) {
+		std::vector<std::vector<T>> result;
+		std::vector<T> tmp;
+		unsigned i, j;
+		for (i = 0; i < _MX.size(); i++)
+		{
+			for (j = 0; j < _MX[0].size(); j++)
+			{
+				tmp.push_back(_MX[i][j] * scalar);
+			}
+			result.push_back(tmp);
+			tmp.clear();
+		}
+		return result;
+	}
+
+	// Scalar Division
+	Matrix operator/(double scalar) {
+		std::vector<std::vector<T>> result;
+		std::vector<T> tmp;
+		unsigned i, j;
+		for (i = 0; i < _MX.size(); i++)
+		{
+			for (j = 0; j < _MX[0].size(); j++)
+			{
+				tmp.push_back(_MX[i][j] / scalar);
+			}
+			result.push_back(tmp);
+			tmp.clear();
+		}
+		return result;
+	}
+
+
 };
 
 #endif // MATRIX_H
