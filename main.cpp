@@ -1,50 +1,94 @@
 #include <iostream>
 #include "Matrix.h"
+#include "fraction.h"
 
 int main() {
-    Matrix<int> matrix =
+    Matrix<fraction> fA =
     {
-        {  1,  0, -1,  1 },
-        {  2, -2,  1,  7 },
-        { -1, -1,  3,  2 },
-        {  0, -1,  1,  2 }
+        {{1, 2}, {1, 3}, {5, 3}, {8, 7}},
+        {{4, 8}, {7, 9}, {9, 4}, {5, 4}},
+        {{1, 2}, {1, 3}, {5, 2}, {8, 5}},
+        {{4, 8}, {7, 9}, {9, 4}, {5, 4}}
     };
 
-    matrix.printM();
+    std::cout << "Matrix fA:\n";
+    std::cout << fA << std::endl;
 
-    printV(matrix.get_row(0));
-    printV(matrix.get_colum(0));
-
-    for (int i = 0; i < 4; i++)
+    Matrix<fraction> fB =
     {
-        matrix.transpose();
-        matrix.printM();
-    }
+        {{8, 3}, {7, 2}, {6, 5}, {5, 3}},
+        {{8, 3}, {7, 2}, {6, 5}, {5, 3}},
+        {{8, 3}, {7, 2}, {6, 5}, {5, 3}},
+        {{8, 3}, {7, 2}, {6, 5}, {5, 3}}
+    };
 
-    std::cout << "Rang = " << matrix.rang() << "\n";
-    std::cout << "=======" << "\n";
-    Matrix<int> E=
+    std::cout << "Matrix fB:\n";
+    std::cout << fB;
+
+    std::cout << "---> fA + fB:\n";
+    std::cout << fA + fB;
+    std::cout << "---> fA - fB:\n";
+    std::cout << fA - fB;
+    std::cout << "---> fA * fB:\n";
+    std::cout << fA * fB;
+
+    Matrix<int> A =
     {
-        {  2,  0,  0,  0 },
+        { 1, 4, 2, 1 },
+        {-1,-1, 3, 2 },
+        { 0, 5, 7,-4 },
+        { 2, 1,-3, 2 }
+    };
+    Matrix<int> B =
+    {
+        {  5,  9,  4,  5 },
+        {  7,  1,  3,  9 },
+        {  0,  4,  1,  2 },
+        {  8,  5,  6,  7 }
+    };
+    Matrix<int> E =
+    {
+        {  1,  0,  0,  0 },
         {  0,  1,  0,  0 },
         {  0,  0,  1,  0 },
         {  0,  0,  0,  1 }
     };
-    std::cout << "Rang = " << E.rang() << "\n";
 
-    (matrix * E).printM();
-    std::cout << "=======" << "\n";
-    (matrix + E).printM();
-    std::cout << "=======" << "\n";
-    (matrix - E).printM();
-    std::cout << "=======" << "\n";
-    (E + 1).printM();
-    std::cout << "=======" << "\n";
-    (E - 1).printM();
-    std::cout << "=======" << "\n";
-    (E * 1).printM();
-    std::cout << "=======" << "\n";
-    ((E * 8)/2).printM();
+    std::cout << "\nMatrix A:\n";
+    std::cout << A;   
+    std::cout << "\nMatrix B:\n";
+    std::cout << B;
+    std::cout << "\nMatrix E:\n";
+    std::cout << E;
+
+    std::cout << "\nRang A = " << A.rang() << "\n";
+    std::cout << "Rang B = " << B.rang() << "\n";
+    std::cout << "Rang E = " << E.rang() << "\n\n";
+
+    std::cout << "See transpose B: \n";
+
+    for (int i = 0; i < 2; i++)
+    {
+        B.transpose();
+        std::cout << B;
+    }
+
+    std::cout << "Operations with Matrix:\n";
+    std::cout << "--> DET(A): " << A.det() << "\n";
+    std::cout << "--> A * B:\n";
+    std::cout << A * B;
+    std::cout << "--> A + B:\n";
+    std::cout << A + B;
+    std::cout << "--> A - B:\n";
+    std::cout << A - B;
+    std::cout << "--> A + const (5):\n";
+    std::cout << A + 5;
+    std::cout << "--> A - const (5):\n";
+    std::cout << A - 5;
+    std::cout << "--> E * const (8):\n";
+    std::cout << E * 8;
+    std::cout << "--> (E * 8) / 2:\n";
+    std::cout << (E * 8) / 2;
 
     system("pause");
     return 0;
