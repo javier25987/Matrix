@@ -214,7 +214,7 @@ public:
 		return rows;
 	}
 
-
+	/*
 	double det() const
 	{
 		size_t rows = _MX.size();
@@ -269,14 +269,12 @@ public:
 				}
 			}
 
-			/*
 			std::cout << "---\n";
 
 			for (auto x : matrix)
 			{
 				printV(x);
 			}
-			*/
 		}
 
 		double result = 1.0;
@@ -286,36 +284,7 @@ public:
 		}
 		return result;
 	}
-
-
-	Matrix operator+(const Matrix<fraction>& mat)
-	{
-		std::vector<std::vector<T>> result = mat;
-		for (size_t i = 0; i < _MX.size(); i++)
-		{
-			for (size_t j = 0; j < _MX[0].size(); j++)
-			{
-				result[i][j] += _MX[i][j];
-			}
-		}
-		return result;
-
-	}
-
-
-	Matrix operator-(const Matrix<fraction>& mat)
-	{
-		std::vector<std::vector<T>> result = mat;
-		for (size_t i = 0; i < _MX.size(); i++)
-		{
-			for (size_t j = 0; j < _MX[0].size(); j++)
-			{
-				result[i][j] -= _MX[i][j];
-			}
-		}
-		return result;
-
-	}
+	*/
 
 
 	size_t get_cols()  const
@@ -349,7 +318,7 @@ public:
 
 
 	// ����� ���� ������
-	Matrix operator+(Matrix& B) 
+	Matrix operator+(Matrix& B)
 	{
 		std::vector<std::vector<T>> sum;
 		std::vector<T> tmp;
@@ -365,7 +334,6 @@ public:
 		}
 		return sum;
 	}
-
 
 	// �������� ���� ������
 	Matrix operator-(Matrix& B) 
@@ -384,7 +352,6 @@ public:
 		}
 		return diff;
 	}
-
 
 	// ��������� ������
 	Matrix operator*(Matrix& B) 

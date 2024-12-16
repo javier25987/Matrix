@@ -31,6 +31,8 @@ int main() {
     std::cout << fA - fB;
     std::cout << "---> fA * fB:\n";
     std::cout << fA * fB;
+    std::cout << "---> fA * 3:\n";
+    std::cout << fA * 3;
 
     Matrix<int> A =
     {
@@ -74,7 +76,6 @@ int main() {
     }
 
     std::cout << "Operations with Matrix:\n";
-    std::cout << "--> DET(A): " << A.det() << "\n";
     std::cout << "--> A * B:\n";
     std::cout << A * B;
     std::cout << "--> A + B:\n";
@@ -89,6 +90,12 @@ int main() {
     std::cout << E * 8;
     std::cout << "--> (E * 8) / 2:\n";
     std::cout << (E * 8) / 2;
+
+    std::cout << "test super matrix:\n";
+
+    Matrix<Matrix<int>> super_matrix = { {A}, {B} };
+
+    std::cout << super_matrix;
 
     system("pause");
     return 0;
